@@ -1,0 +1,17 @@
+{% extends 'tela_base.html' %}
+{% block conteudo %}
+    <h1>Bem-vindo à Aplicação!</h1>
+    <div class="block">
+        <a href="{{url_for('cadastro')}}" class="botao">Registrar-se</a>
+        {% if session['user'] %}
+        <form action="{{url_for('logout')}}" method="post">
+            <input type="submit" value="Logout" class="botao">
+        </form>
+        {% else %}
+        <a href="{{ url_for('login') }}", class="botao">Login</a>
+        {% endif %}
+    </div>
+    {% if user_name %}
+        <h2>Você está logado, {{ user_name }}!</h2>
+    {% endif %}
+{% endblock %}

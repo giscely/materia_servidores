@@ -1,0 +1,29 @@
+{% extends 'tela_base.html' %}
+{% block header %}
+    <a href="{{url_for('index')}}" class="botao">Home</a>
+    {% if session['user'] %}
+    <form action="{{url_for('logout')}}" method="post">
+        <input type="submit" value="Logout" class="botao">
+    </form>
+    {% else %}
+    <a href="{{ url_for('cadastro') }}", class="botao">Registrar-se</a>
+    {% endif %}
+{% endblock %}
+{% block conteudo %}
+    <h1>Login de usuários</h1>
+    <div class="cont_form">
+        <form action="{{url_for('login')}}" method="post">
+            <input type="text" name="nome" placeholder="Nome" class="input" required>
+            <input type="email" name="email" placeholder="Email" class="input" required>
+            <input type="password" name="senha" placeholder="Senha" class="input" required>
+            {% with messages = get_flashed_messages(with_categories=False) %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="color: red;">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <input type="submit" value="Enviar" class="botao">
+        </form>
+    </div>
+{% endblock %}
